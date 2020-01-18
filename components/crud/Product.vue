@@ -22,21 +22,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-text-field v-model="newKeyword" label="Add new keyword" />
-      <v-btn @click="addKeyword">Add keyword</v-btn>
-    </v-row>
-    <v-row>
-      <v-container>
-        <v-chip
-          v-for="(word, index) in keywords"
-          :color="getKeywordColor(word)"
-          v-bind:key="index"
-          class="ma-2"
-          label
-          ><v-icon left>label</v-icon>{{ word }}
-          <v-icon v-on:click="removeKeyword(position)" right>clear</v-icon>
-        </v-chip>
-      </v-container>
+      <Keywords v-model="keywords" />
     </v-row>
     <!-- <v-row>
       <v-col cols="12" md="4">
@@ -50,7 +36,8 @@
 export default {
   name: 'Product',
   components: {
-    EntityRef: () => import('~/components/crud/inputs/EntityRef')
+    EntityRef: () => import('~/components/crud/inputs/EntityRef'),
+    Keywords: () => import('~/components/crud/inputs/Keywords')
   },
   props: {
     value: {
@@ -65,9 +52,7 @@ export default {
       categoryId: this.value.categoryId || null,
       title: this.value.title || null,
       specs: this.value.specs || null,
-      keywords: [],
-      keywordsColors: {},
-      newKeyword: null
+      keywords: []
     }
   },
   methods: {
@@ -77,36 +62,9 @@ export default {
         universalProductCode: this.universalProductCode,
         categoryId: this.categoryId,
         title: this.title,
-        specs: this.specs
+        specs: this.specs,
+        keywords: this.keywords
       }
-    },
-    getRandomColor() {
-      const colors = [
-        'primary',
-        'accent',
-        'secondary',
-        'info',
-        'warning',
-        'error',
-        'success'
-      ]
-      const index = Math.floor(Math.random() * colors.length)
-      return colors[index]
-    },
-    getKeywordColor(word) {
-      if (this.keywordsColors[word] == null) {
-        this.keywordsColors[word] = this.getRandomColor()
-      }
-      return this.keywordsColors[word]
-    },
-    addKeyword() {
-      if (!this.keywords.includes(this.newKeyword))
-        this.keywords.push(this.newKeyword)
-      this.newKeyword = null
-    },
-    removeKeyword(position) {
-      const word = this.keywords.splice(position, 1)[0]
-      delete this.keywordsColors[word]
     }
   }
 }

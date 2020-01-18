@@ -5,12 +5,12 @@
         <SearchWrapper :component="component" @row-clicked="rowClick" />
       </v-card>
     </v-dialog>
-    <v-text-field v-model="entityId" :label="label" clearable>
+    <v-text-field v-model="entityId" :label="label" clearable readonly>
       <template slot="prepend-inner">
         <!-- <v-btn icon> -->
 
         <v-icon @click="dialog = true">list</v-icon>
-        <!-- <v-icon @click="entityId = null" color="error">clear</v-icon> -->
+        <!-- <v-icon @click="entityId = null" color="error">clear</v-ighjghjghjtyutyuhjghjggjhcon> -->
         <!-- </v-btn> -->
         <!-- <v-icon>search</v-icon> -->
 

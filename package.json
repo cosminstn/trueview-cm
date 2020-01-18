@@ -24,7 +24,8 @@
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.3.6",
     "lodash": "^4.17.15",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "random-words": "^1.1.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",
