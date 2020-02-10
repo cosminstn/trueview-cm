@@ -24,8 +24,8 @@ export default {
         },
         {
           align: 'center',
-          text: 'Category Id',
-          value: 'categoryId'
+          text: 'Category',
+          value: 'category'
         },
         {
           align: 'center',

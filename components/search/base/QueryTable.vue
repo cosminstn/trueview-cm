@@ -58,8 +58,11 @@ export default {
   },
   methods: {
     refreshData() {
+      const endpoint = this.allowSearch
+        ? `/${this.apiController}/search?query=${this.search || ''}`
+        : `/${this.apiController}`
       this.$axios
-        .get(`/${this.apiController}/search?query=${this.search || ''}`)
+        .get(endpoint)
         .then((response) => {
           this.rows = response.data
         })

@@ -38,7 +38,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/vue-notifications'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -62,7 +62,8 @@ export default {
           login: {
             url: '/auth/login',
             method: 'post',
-            propertyName: 'token'
+            propertyName: 'token',
+            altProperty: 'refreshToken' // cu aceasta proprietate ar trebui sa putem apela o function this.$auth.refreshToken(). Cand drq o apelam?
           },
           // logout: { url: '/auth/logout', method: 'post' },
           logout: false,

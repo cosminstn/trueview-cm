@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       dialog: false,
-      entityId: null
+      entityId: this.value || null
     }
   },
   watch: {

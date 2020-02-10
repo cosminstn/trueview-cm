@@ -84,6 +84,9 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <notifications position="top right" />
+
     <v-footer :fixed="fixed" app>
       <span>&copy; 2019</span>
     </v-footer>

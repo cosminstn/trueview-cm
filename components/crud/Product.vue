@@ -18,6 +18,7 @@
         <v-text-field
           v-model="universalProductCode"
           label="Universal Product Code"
+          counter
         />
       </v-col>
     </v-row>
@@ -52,7 +53,7 @@ export default {
       categoryId: this.value.categoryId || null,
       title: this.value.title || null,
       specs: this.value.specs || null,
-      keywords: []
+      keywords: this.value.keywords || null
     }
   },
   methods: {

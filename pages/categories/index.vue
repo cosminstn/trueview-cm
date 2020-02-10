@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <CategorySearch @row-click="rowClick" />
+    <CategorySearch @row-clicked="rowClick" />
 
     <v-card-actions>
       <v-btn @click="$router.push('/categories/new')" color="primary">

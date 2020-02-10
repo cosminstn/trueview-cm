@@ -1,3 +1,11 @@
 <template>
-  <h1>Creating a new category</h1>
+  <CrudWrapper component="category" />
 </template>
+
+<script>
+export default {
+  components: {
+    CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper')
+  }
+}
+</script>

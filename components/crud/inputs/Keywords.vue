@@ -51,7 +51,8 @@ export default {
     maxHeight: {
       type: Number,
       default: 300
-    }
+    },
+    generateRandom: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -61,7 +62,8 @@ export default {
     }
   },
   created() {
-    this.initializeKeywords(randomWords(100))
+    if (this.generateRandom) this.initializeKeywords(randomWords(100))
+    else this.initializeKeywords(this.value)
   },
   methods: {
     getRandomColor() {
@@ -76,12 +78,14 @@ export default {
       return this.keywordsColors[word]
     },
     initializeKeywords(arr) {
+      if (arr == null || arr.length === 0) return
       arr.forEach((w) => {
         this.newKeyword = w
         this.addKeyword()
       })
     },
     addKeyword() {
+      if (this.newKeyword == null || this.newKeyword.trim() === '') return
       this.newKeyword = this.newKeyword.trim()
       if (!this.keywords.includes(this.newKeyword))
         this.keywords.push(this.newKeyword)

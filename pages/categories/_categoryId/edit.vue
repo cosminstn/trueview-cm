@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h1>Category id: {{ this.$route.params.categoryId }}</h1>
-
     <CrudWrapper
       v-if="category != null"
       :value="category"
+      @succeeded="$router.push('/categories')"
       component="category"
     />
   </div>
@@ -25,6 +24,7 @@ export default {
       .get(`/category/${this.$route.params.categoryId}`)
       .then((response) => {
         this.category = response.data
+        console.log(this.category)
       })
       .catch((err) => {
         this.category = null
