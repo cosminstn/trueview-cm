@@ -26,7 +26,7 @@
 // import { mapGetters } from 'vuex'
 
 export default {
-  auth: true,
+  // auth: true,
   computed: {
     user() {
       return this.$auth.user

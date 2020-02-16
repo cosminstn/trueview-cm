@@ -23,6 +23,12 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        :label="$vuetify.theme.dark === true ? 'Dark Theme' : 'Light Theme'"
+        class="ml-3"
+        color="primary"
+      ></v-switch>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -96,6 +102,7 @@
 <script>
 /* eslint-disable no-console */
 export default {
+  middleware: 'authenticated',
   data() {
     return {
       clipped: false,
@@ -133,6 +140,9 @@ export default {
     loggedIn() {
       return this.$auth.loggedIn
     }
+  },
+  created() {
+    console.log('Process env API: ' + process.env.API_BASE_URL)
   }
 }
 </script>

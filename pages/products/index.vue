@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  auth: false,
+  // auth: false,
   components: {
     ProductSearch: () => import('~/components/search/ProductSearch')
   },

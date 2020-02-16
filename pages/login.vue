@@ -34,6 +34,7 @@
 
 <script>
 export default {
+  layout: 'login',
   auth: 'guest',
   data() {
     return {

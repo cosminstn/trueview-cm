@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  auth: false,
+  // auth: false,
   components: {
     Keywords: () => import('~/components/crud/inputs/Keywords')
   }

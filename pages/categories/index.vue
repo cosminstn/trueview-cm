@@ -2,6 +2,10 @@
   <v-card>
     <CategorySearch @row-clicked="rowClick" />
 
+    <v-divider />
+
+    <v-treeview />
+
     <v-card-actions>
       <v-btn @click="$router.push('/categories/new')" color="primary">
         <v-icon>add</v-icon> Adauga
@@ -13,7 +17,7 @@
 <script>
 /* eslint-disable no-console */
 export default {
-  auth: false,
+  // auth: false,
   components: {
     CategorySearch: () => import('~/components/search/CategorySearch')
   },

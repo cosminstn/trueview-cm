@@ -1,4 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
+// nu mere require('envconfig') pentru ca se uita in root node modules
+// nici require('~/envconfig') nu merge pentru ca face acelasi lucru
+// eslint-disable-next-line nuxt/no-cjs-in-config
+require('./envconfig')
 
 export default {
   mode: 'spa',
@@ -86,7 +90,7 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: 'https://localhost:5001/api/'
+    baseURL: process.env.API_BASE_URL
   },
   /*
    ** vuetify module configuration

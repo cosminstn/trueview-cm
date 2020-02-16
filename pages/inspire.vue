@@ -16,6 +16,6 @@
 
 <script>
 export default {
-  auth: true
+  // auth: true
 }
 </script>

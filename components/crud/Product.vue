@@ -17,6 +17,7 @@
       <v-col cols="12" md="4">
         <v-text-field
           v-model="universalProductCode"
+          :rules="[rules.required, rules.upc]"
           label="Universal Product Code"
           counter
         />
@@ -53,7 +54,14 @@ export default {
       categoryId: this.value.categoryId || null,
       title: this.value.title || null,
       specs: this.value.specs || null,
-      keywords: this.value.keywords || null
+      keywords: this.value.keywords || null,
+      rules: {
+        required: (value) => !!value || 'Required!',
+        upc: (value) => {
+          const pattern = /^\d{13}$/
+          return pattern.test(value) || 'Invalid UPC!'
+        }
+      }
     }
   },
   methods: {
