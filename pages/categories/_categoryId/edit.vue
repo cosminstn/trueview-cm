@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <v-card>
     <CrudWrapper
       v-if="category != null"
       :value="category"
       @succeeded="$router.push('/categories')"
       component="category"
     />
-  </div>
+  </v-card>
 </template>
 
 <script>

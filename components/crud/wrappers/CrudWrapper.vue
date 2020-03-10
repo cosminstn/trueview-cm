@@ -16,7 +16,7 @@
       :value="value"
     ></Product>
 
-    <v-row class="mx-2">
+    <v-card-actions>
       <v-btn v-if="crudMode === 'add'" @click="add" class="mx-2" color="success"
         ><v-icon>add</v-icon>Add</v-btn
       >
@@ -30,7 +30,7 @@
       <v-btn v-if="crudMode === 'update'" class="mx-2" color="error"
         ><v-icon>delete</v-icon>Delete</v-btn
       >
-    </v-row>
+    </v-card-actions>
   </v-form>
 </template>
 
