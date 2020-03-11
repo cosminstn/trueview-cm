@@ -110,12 +110,12 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
+          icon: 'apps',
           title: 'Welcome',
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'bubble_chart',
           title: 'Inspire',
           to: '/inspire'
         },
