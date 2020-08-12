@@ -16,6 +16,12 @@
       :value="value"
     ></Product>
 
+    <Platform
+      ref="platform"
+      v-if="component.toLowerCase() === 'platform'"
+      :value="value"
+    ></Platform>
+
     <v-card-actions>
       <v-btn v-if="crudMode === 'add'" @click="add" class="mx-2" color="success"
         ><v-icon>add</v-icon>Add</v-btn
@@ -41,7 +47,8 @@ export default {
   name: 'CrudWrapper',
   components: {
     Category: () => import('~/components/crud/Category.vue'),
-    Product: () => import('~/components/crud/Product.vue')
+    Product: () => import('~/components/crud/Product.vue'),
+    Platform: () => import('~/components/crud/Platform.vue')
   },
   props: {
     component: {

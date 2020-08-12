@@ -1,8 +1,17 @@
-<template> <v-card></v-card></template>
+<template>
+  <CrudWrapper @succeeded="success" component="platform" />
+</template>
 
 <script>
 export default {
-  name: 'NewPlatform',
-  title: 'Add Platform'
+  components: {
+    CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper')
+  },
+  methods: {
+    success(response) {
+      this.$notify('Platform added to the database!')
+      this.$router.push('/platforms')
+    }
+  }
 }
 </script>

@@ -1,10 +1,13 @@
 <template>
-  <CrudWrapper
-    v-if="product != null"
-    :value="product"
-    @succeeded="success"
-    component="product"
-  />
+  <v-col>
+    <CrudWrapper
+      v-if="product != null"
+      :value="product"
+      @succeeded="success"
+      component="product"
+    />
+    <ReviewsSearch v-if="product != null" />
+  </v-col>
 </template>
 
 <script>
@@ -12,7 +15,8 @@
 
 export default {
   components: {
-    CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper')
+    CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper'),
+    ReviewsSearch: () => import('~/components/reviews/ReviewsSearch')
   },
   data: () => ({
     product: null

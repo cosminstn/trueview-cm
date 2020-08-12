@@ -64,7 +64,7 @@ export default {
       this.$axios
         .get(endpoint)
         .then((response) => {
-          this.rows = response.data
+          this.rows = response.data.items
         })
         .catch((err) => {
           console.log(
