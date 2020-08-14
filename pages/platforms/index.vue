@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     handleRowClick(row) {
-      this.$router.push(`/products/${row.id}/edit`)
+      this.$router.push(`/platforms/${row.id}/edit`)
     }
   }
 }
