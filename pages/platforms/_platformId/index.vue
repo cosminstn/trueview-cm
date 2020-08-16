@@ -10,8 +10,13 @@
 
     <CrudQueryTable
       :headers="headers"
-      :api-controller="`/api/platform/${platformId}`"
+      :api-controller="`/platform/${platformId}/api-keys/search`"
+      :endpoints="{
+        add: `/platform/${platformId}/api-keys`,
+        search: '/platform/${platformId}/api-keys'
+      }"
       title="API Keys"
+      crud-component="platformApiKey"
     />
   </v-card>
 </template>
@@ -44,7 +49,8 @@ export default {
         {
           text: 'Key',
           value: 'key'
-        }
+        },
+        { text: 'Actions', value: 'actions', sortable: false }
       ]
     }
   },

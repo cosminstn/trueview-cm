@@ -36,7 +36,11 @@
                   </v-card-title>
 
                   <v-card-text>
-                    <CrudWrapper @succeeded="" component="platform" />
+                    <CrudWrapper
+                      @succeeded=""
+                      :component="crudComponent"
+                      :endpoints="crudEndpoints"
+                    />
                   </v-card-text>
 
                   <!-- <v-card-actions>
@@ -63,6 +67,7 @@
 </template>
 
 <script>
+const _ = require('lodash')
 export default {
   name: 'CrudQueryTable',
   components: {
@@ -85,6 +90,14 @@ export default {
     title: {
       type: String,
       default: undefined
+    },
+    crudComponent: {
+      type: String,
+      required: true
+    },
+    endpoints: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -119,7 +132,13 @@ export default {
         : this.crudMode === 'read'
         ? 'Item Details'
         : 'Add Item'
+    },
+    crudEndpoints() {
+      return _.pick(this.endpoints, ['add', 'delete'])
     }
+  },
+  created() {
+    this.refreshData()
   },
   methods: {
     edit(item) {
@@ -133,12 +152,13 @@ export default {
     succeeded() {
       this.dialog = false
     },
+
     refreshData() {
       this.loadingData = true
       this.$axios
-        .get(`/platform/${this.$route.params.platformId}`)
+        .get(this.apiController)
         .then((response) => {
-          this.platform = response.data
+          this.items = response.data.items
         })
         .catch((err) => {
           this.platform = null

@@ -2,13 +2,13 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="6">
-        <v-text-field v-model="name" label="Platform Title" />
+        <v-text-field v-model="name" label="API Key Name" />
       </v-col>
       <v-col cols="12" md="6">
-        <v-text-field v-model="description" label="Platform Website" />
+        <v-text-field v-model="description" label="Description" />
       </v-col>
-      <v-col v-if="isValueEmpty" cols="12" md="6">
-        <v-text-field v-model="value.key" label="Platform Website" />
+      <v-col v-if="!isValueEmpty" cols="12" md="6">
+        <v-text-field :value="value.key" readonly label="Platform Website" />
       </v-col>
     </v-row>
   </v-container>
@@ -29,9 +29,8 @@ export default {
   data() {
     return {
       id: this.value.id || null,
-      title: this.value.title || null,
-      website: this.value.website || null,
-      keywords: this.value.keywords || null,
+      name: this.value.name || null,
+      description: this.value.description || null,
       rules: {
         required: (value) => !!value || 'Required!'
       }
@@ -42,13 +41,15 @@ export default {
       return _.isEmpty(this.value)
     }
   },
+  created() {
+    console.log('created platformApiKey crud component')
+  },
   methods: {
     getValue() {
       return {
         id: this.id,
-        title: this.title,
-        website: this.website,
-        keywords: this.keywords
+        name: this.name,
+        description: this.description
       }
     }
   }

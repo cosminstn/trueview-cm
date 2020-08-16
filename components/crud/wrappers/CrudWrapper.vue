@@ -12,19 +12,20 @@
     ></Category>
     <Product
       ref="product"
-      v-if="component.toLowerCase() === 'product'"
+      v-else-if="component.toLowerCase() === 'product'"
       :value="value"
     ></Product>
 
     <Platform
       ref="platform"
-      v-if="component.toLowerCase() === 'platform'"
+      v-else-if="component.toLowerCase() === 'platform'"
       :value="value"
     ></Platform>
 
     <PlatformApiKey
       ref="platformApiKey"
-      v-if="component.toLowerCase() === 'platformApiKey'"
+      v-else-if="component.toLowerCase() === 'platformapikey'"
+      :value="value"
     ></PlatformApiKey>
 
     <v-card-actions v-if="!readonly">
@@ -68,6 +69,10 @@ export default {
     readonly: {
       type: Boolean,
       default: false
+    },
+    endpoints: {
+      type: Object,
+      default: null
     }
   },
   data() {
@@ -80,10 +85,28 @@ export default {
       return this.value == null || _.isEmpty(this.value) ? 'add' : 'update'
     }
   },
+  created() {
+    const acknowledgedEntities = [
+      'category',
+      'product',
+      'platform',
+      'platformapikey'
+    ]
+    if (!acknowledgedEntities.includes(this.component.toLowerCase())) {
+      console.error('Unknown entity: ' + this.component)
+    }
+  },
   methods: {
     add() {
+      const endpoint =
+        _.isEmpty(this.endpoints) ||
+        this.endpoints.add == null ||
+        this.endpoints.add.trim() === ''
+          ? `/${this.component}`
+          : this.endpoints.add
+
       this.$axios
-        .post(`/${this.component}`, this.getFormValue())
+        .post(endpoint, this.getFormValue())
         .then((r) => {
           this.$emit('succeeded', r)
         })
