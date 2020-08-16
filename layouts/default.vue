@@ -128,6 +128,11 @@ export default {
           icon: 'smartphone',
           title: 'Products',
           to: '/products'
+        },
+        {
+          icon: 'code',
+          title: 'Platforms',
+          to: '/platforms'
         }
       ],
       miniVariant: false,
