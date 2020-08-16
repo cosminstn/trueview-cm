@@ -2,7 +2,7 @@
   <div>
     <v-card-title
       ><v-col>
-        <v-row v-if="title != null">{{ title }}</v-row>
+        <v-row v-if="title != null && title !== undefined">{{ title }}</v-row>
         <v-row>
           <v-text-field
             v-if="allowSearch === true"
@@ -38,7 +38,7 @@ export default {
     },
     title: {
       type: String,
-      default: null
+      default: undefined
     }
   },
   data() {

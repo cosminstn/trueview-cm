@@ -11,7 +11,7 @@
 export default {
   name: 'CategorySearch',
   components: {
-    QueryTable: () => import('~/components/search/base/QueryTable')
+    QueryTable: () => import('~/components/tables/QueryTable')
   },
   data() {
     return {

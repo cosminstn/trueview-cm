@@ -2,16 +2,21 @@
   <v-container>
     <v-row>
       <v-col cols="12" md="6">
-        <v-text-field v-model="title" label="Platform Title" />
+        <v-text-field v-model="name" label="Platform Title" />
       </v-col>
       <v-col cols="12" md="6">
-        <v-text-field v-model="website" label="Platform Website" />
+        <v-text-field v-model="description" label="Platform Website" />
+      </v-col>
+      <v-col v-if="isValueEmpty" cols="12" md="6">
+        <v-text-field v-model="value.key" label="Platform Website" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+const _ = require('lodash')
+
 export default {
   name: 'Platform',
 
@@ -30,6 +35,11 @@ export default {
       rules: {
         required: (value) => !!value || 'Required!'
       }
+    }
+  },
+  computed: {
+    isValueEmpty() {
+      return _.isEmpty(this.value)
     }
   },
   methods: {

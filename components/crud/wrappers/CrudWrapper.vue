@@ -22,7 +22,12 @@
       :value="value"
     ></Platform>
 
-    <v-card-actions>
+    <PlatformApiKey
+      ref="platformApiKey"
+      v-if="component.toLowerCase() === 'platformApiKey'"
+    ></PlatformApiKey>
+
+    <v-card-actions v-if="!readonly">
       <v-btn v-if="crudMode === 'add'" @click="add" class="mx-2" color="success"
         ><v-icon>add</v-icon>Add</v-btn
       >
@@ -48,7 +53,8 @@ export default {
   components: {
     Category: () => import('~/components/crud/Category.vue'),
     Product: () => import('~/components/crud/Product.vue'),
-    Platform: () => import('~/components/crud/Platform.vue')
+    Platform: () => import('~/components/crud/Platform.vue'),
+    PlatformApiKey: () => import('~/components/crud/PlatformApiKey')
   },
   props: {
     component: {
@@ -58,6 +64,10 @@ export default {
     value: {
       type: Object,
       default: () => ({})
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
