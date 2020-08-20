@@ -39,7 +39,11 @@
         color="primary"
         ><v-icon>save</v-icon>Save</v-btn
       >
-      <v-btn v-if="crudMode === 'update'" class="mx-2" color="error"
+      <v-btn
+        v-if="crudMode === 'update'"
+        @click="remove"
+        class="mx-2"
+        color="error"
         ><v-icon>delete</v-icon>Delete</v-btn
       >
     </v-card-actions>
@@ -115,13 +119,42 @@ export default {
         })
     },
     save() {
+      const endpoint =
+        _.isEmpty(this.endpoints) ||
+        this.endpoints.update == null ||
+        this.endpoints.update.trim() === ''
+          ? `/${this.component}`
+          : this.endpoints.add
+
       const formValue = this.getFormValue()
       if (formValue == null || formValue.id == null) {
         console.log('Invalid form value!')
         return
       }
       this.$axios
-        .put(`/${this.component}/${formValue.id}`, formValue)
+        .put(endpoint + '/' + formValue.id, formValue)
+        .then((r) => {
+          this.$emit('succeeded', r)
+        })
+        .catch((e) => {
+          this.$emit('failed', e)
+        })
+    },
+    remove() {
+      const endpoint =
+        _.isEmpty(this.endpoints) ||
+        this.endpoints.delete == null ||
+        this.endpoints.delete.trim() === ''
+          ? `/${this.component}`
+          : this.endpoints.add
+
+      const formValue = this.getFormValue()
+      if (formValue == null || formValue.id == null) {
+        console.log('Invalid form value!')
+        return
+      }
+      this.$axios
+        .delete(endpoint + '/' + formValue.id)
         .then((r) => {
           this.$emit('succeeded', r)
         })

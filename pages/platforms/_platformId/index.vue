@@ -13,7 +13,9 @@
       :api-controller="`/platform/${platformId}/api-keys/search`"
       :endpoints="{
         add: `/platform/${platformId}/api-keys`,
-        search: '/platform/${platformId}/api-keys'
+        search: `/platform/${platformId}/api-keys`,
+        update: `/platform/${platformId}/api-keys`,
+        delete: `/platform/${platformId}/api-keys`
       }"
       title="API Keys"
       crud-component="platformApiKey"
