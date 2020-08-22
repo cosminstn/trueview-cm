@@ -133,6 +133,11 @@ export default {
           icon: 'code',
           title: 'Platforms',
           to: '/platforms'
+        },
+        {
+          icon: 'code',
+          title: 'Users',
+          to: '/users'
         }
       ],
       miniVariant: false,
