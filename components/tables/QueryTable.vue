@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     refreshData() {
-      const endpoint = `/${this.apiController}`
+      const endpoint = this.allowSearch
         ? `/${this.apiController}/search`
         : `/${this.apiController}`
       this.$axios

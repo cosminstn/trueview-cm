@@ -26,6 +26,11 @@
     <v-row>
       <Keywords v-model="keywords" />
     </v-row>
+    <v-row v-if="!isValueEmpty">
+      <v-col>
+        <ProductReviews :gtin="universalProductCode" />
+      </v-col>
+    </v-row>
     <!-- <v-row>
       <v-col cols="12" md="4">
         <v-text-area v-model="specs" label="Specifications" />
@@ -35,11 +40,13 @@
 </template>
 
 <script>
+const _ = require('lodash')
 export default {
   name: 'Product',
   components: {
     EntityRef: () => import('~/components/crud/inputs/EntityRef'),
-    Keywords: () => import('~/components/crud/inputs/Keywords')
+    Keywords: () => import('~/components/crud/inputs/Keywords'),
+    ProductReviews: () => import('~/components/reviews/ProductReviews')
   },
   props: {
     value: {
@@ -62,6 +69,11 @@ export default {
           return pattern.test(value) || 'Invalid UPC!'
         }
       }
+    }
+  },
+  computed: {
+    isValueEmpty() {
+      return _.isEmpty(this.value)
     }
   },
   methods: {
