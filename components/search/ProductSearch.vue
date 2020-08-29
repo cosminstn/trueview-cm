@@ -1,11 +1,13 @@
 <template>
-  <QueryTable
-    @row-clicked="rowClick"
+  <CrudQueryTable
     :headers="headers"
-    :api-controller="
-      categoryId == null ? 'product' : `category/${categoryId}/products`
-    "
-    title="Products"
+    :api-controller="`/category/${categoryId}/products/search`"
+    :endpoints="{
+      add: `/category/${categoryId}/products`,
+      delete: `/product`
+    }"
+    title="Product"
+    crud-component="product"
   />
 </template>
 
@@ -14,7 +16,7 @@
 export default {
   name: 'ProductSearch',
   components: {
-    QueryTable: () => import('~/components/tables/QueryTable')
+    CrudQueryTable: () => import('~/components/tables/CrudQueryTable')
   },
   props: {
     categoryId: {
