@@ -3,9 +3,13 @@
     <CrudWrapper
       v-if="product != null"
       :value="product"
-      @succeeded="success"
       component="product"
+      readonly
     />
+    <!-- <ReviewsSearch
+      v-if="product != null"
+      :gtin="product.universalProductCode"
+    /> -->
   </v-col>
 </template>
 
@@ -15,6 +19,7 @@
 export default {
   components: {
     CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper')
+    // ReviewsSearch: () => import('~/components/reviews/ReviewsSearch')
   },
   data: () => ({
     product: null

@@ -16,6 +16,12 @@
       </v-col>
     </v-row>
     <v-row><Keywords v-model="keywords" /> </v-row>
+
+    <v-row v-if="id != null">
+      <v-col>
+        <ProductSearch :categoryId="id" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -26,7 +32,8 @@ export default {
   name: 'Category',
   components: {
     EntityRef: () => import('~/components/crud/inputs/EntityRef'),
-    Keywords: () => import('~/components/crud/inputs/Keywords')
+    Keywords: () => import('~/components/crud/inputs/Keywords'),
+    ProductSearch: () => import('~/components/search/ProductSearch')
   },
   props: {
     value: {
@@ -45,7 +52,8 @@ export default {
       id: this.value.id || null,
       title: this.value.title || null,
       description: this.value.description || null,
-      parentCategoryId: this.value.parentCategoryId || null,
+      parentCategoryId:
+        this.value.parentCategory != null ? this.value.parentCategory.id : null,
       keywords: this.value.keywords || null
     }
   },
@@ -54,7 +62,10 @@ export default {
       return {
         id: this.id,
         title: this.title,
-        parentCategoryId: this.parentCategoryId,
+        description: this.value.description,
+        parentCategory: {
+          id: this.parentCategoryId
+        },
         keywords: this.keywords
       }
     }
