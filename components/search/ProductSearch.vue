@@ -2,8 +2,10 @@
   <QueryTable
     @row-clicked="rowClick"
     :headers="headers"
+    :api-controller="
+      categoryId == null ? 'product' : `category/${categoryId}/products`
+    "
     title="Products"
-    api-controller="product"
   />
 </template>
 
@@ -14,19 +16,22 @@ export default {
   components: {
     QueryTable: () => import('~/components/tables/QueryTable')
   },
-  data() {
-    return {
-      headers: [
+  props: {
+    categoryId: {
+      type: String,
+      default: null
+    }
+  },
+
+  computed: {
+    headers() {
+      const headers = [
         {
           align: 'center',
           text: 'Product Id',
           value: 'id'
         },
-        {
-          align: 'center',
-          text: 'Category',
-          value: 'category'
-        },
+
         {
           align: 'center',
           text: 'Title',
@@ -38,6 +43,14 @@ export default {
           value: 'universalProductCode'
         }
       ]
+      if (this.id != null) {
+        headers.splice(1, 0, {
+          text: 'Category ID',
+          value: 'category.id'
+        })
+      }
+
+      return headers
     }
   },
   methods: {

@@ -29,7 +29,7 @@ export default {
         {
           align: 'center',
           text: 'Parent category id',
-          value: 'parentCategoryId'
+          value: 'parentCategory.id'
         }
       ]
     }

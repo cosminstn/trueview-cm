@@ -3,7 +3,7 @@
     <v-card-text>
       <QueryTable
         :headers="headers"
-        :api-controller="`review/upc/${gtin}`"
+        :api-controller="`review/gtin/${gtin}/search`"
         title="Reviews"
       />
     </v-card-text>
