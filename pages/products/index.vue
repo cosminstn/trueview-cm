@@ -4,7 +4,7 @@
 
     <v-card-actions>
       <v-btn @click="$router.push('/products/new')" color="primary">
-        <v-icon>add</v-icon> Adauga
+        <v-icon>add</v-icon> Register Product
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -25,9 +25,9 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="login()" color="primary">Login</v-btn>
-          <!-- <v-btn @click="doLoginOper()">Login Oper1</v-btn>
-            <v-btn @click="doLoginUser()">Login User1</v-btn>-->
+          <v-btn @click="login()" :loading="loading" color="primary"
+            >Login</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-layout>
@@ -42,17 +42,23 @@ export default {
     return {
       username: null,
       password: null,
-      showpass: false
+      showpass: false,
+      loading: null
     }
   },
   methods: {
     login() {
-      this.$auth.loginWith('local', {
-        data: {
-          username: this.username,
-          password: this.password
-        }
-      })
+      this.loading = true
+      this.$auth
+        .loginWith('local', {
+          data: {
+            username: this.username,
+            password: this.password
+          }
+        })
+        .finally(() => {
+          this.loading = false
+        })
     }
   }
 }

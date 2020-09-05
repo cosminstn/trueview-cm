@@ -8,7 +8,7 @@
 
     <v-card-actions>
       <v-btn @click="$router.push('/categories/new')" color="primary">
-        <v-icon>add</v-icon> Adauga
+        <v-icon>add</v-icon> Add Category
       </v-btn>
     </v-card-actions>
   </v-card>
