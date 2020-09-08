@@ -28,8 +28,8 @@ export default {
         },
         {
           align: 'center',
-          text: 'Parent category id',
-          value: 'parentCategory.id'
+          text: 'Parent Category',
+          value: 'parentCategory.title'
         }
       ]
     }
