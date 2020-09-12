@@ -108,16 +108,30 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+
+      miniVariant: false,
+      right: true,
+      rightDrawer: false,
+      title: 'TrueView Console'
+    }
+  },
+  computed: {
+    loggedIn() {
+      return this.$auth.loggedIn
+    },
+    userRoles() {
+      return this.$auth != null &&
+        this.$auth.user != null &&
+        this.$auth.user.roles != null
+        ? this.$auth.user.roles
+        : []
+    },
+    items() {
+      const roles = [
         {
           icon: 'apps',
           title: 'Welcome',
           to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
         },
         {
           icon: 'category',
@@ -133,22 +147,16 @@ export default {
           icon: 'code',
           title: 'Platforms',
           to: '/platforms'
-        },
-        {
-          icon: 'code',
+        }
+      ]
+      if (this.userRoles.includes('ADMIN')) {
+        roles.push({
+          icon: 'supervisor_account',
           title: 'Users',
           to: '/users'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'TrueView Console'
-    }
-  },
-  computed: {
-    loggedIn() {
-      return this.$auth.loggedIn
+        })
+      }
+      return roles
     }
   },
   created() {

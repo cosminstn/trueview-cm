@@ -1,6 +1,12 @@
 <template>
   <v-col>
-    <v-data-table :headers="headers" :items="items">
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      :loading="loadingData"
+      :options.sync="pagination"
+      :server-items-length="totalItems"
+    >
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title v-if="title !== undefined && title != null">{{
@@ -72,10 +78,9 @@
         <v-card-text>
           <CrudWrapper
             :key="editDialog"
-            :value="editItem"
+            :value="crudItem"
             @succeeded="
               editDialog = false
-              editItem = false
               refreshData()
             "
             :component="crudComponent"
@@ -94,14 +99,14 @@
         <v-card-text>
           <CrudWrapper
             :key="removeDialog"
-            :value="editItem"
+            :value="crudItem"
             @succeeded="
               removeDialog = false
-              editItem = null
               refreshData()
             "
             :component="crudComponent"
             :endpoints="crudEndpoints"
+            delete-only
           />
         </v-card-text>
       </v-card>
@@ -152,9 +157,11 @@ export default {
       search: null,
       editDialog: false,
       editDialogUpdates: 0,
-      editItem: null,
+      crudItem: null,
       removeDialog: false,
-      removeDialogUpdates: 0
+      removeDialogUpdates: 0,
+      pagination: {},
+      totalItems: 0
     }
   },
   computed: {
@@ -185,6 +192,18 @@ export default {
       return _.pick(this.endpoints, ['add', 'delete', 'update', 'read'])
     }
   },
+  watch: {
+    search() {
+      this.throttledRefreshData()
+    },
+    pagination: {
+      deep: true,
+      immediate: true,
+      handler() {
+        this.throttledRefreshData()
+      }
+    }
+  },
   created() {
     this.refreshData()
   },
@@ -193,31 +212,43 @@ export default {
       this.rawCrudMode = 'edit'
       this.editDialogUpdates++
       this.editDialog = true
-      this.editItem = item
-      console.log('editing item')
+      this.crudItem = item
     },
     remove(item) {
       this.rawCrudMode = 'delete'
-      console.log('delete item')
+      this.crudItem = item
+      this.removeDialog = true
     },
     succeeded() {
       this.dialog = false
     },
-
+    throttledRefreshData: _.throttle(function() {
+      this.refreshData()
+    }, 300),
     refreshData() {
+      if (this.loadingData) {
+        return
+      }
+
       this.loadingData = true
       this.$axios
-        .get(this.apiController)
+        .get(this.apiController, {
+          params: {
+            query: this.search,
+            pageIndex: this.pagination.page,
+            pageSize: this.pagination.itemsPerPage
+          }
+        })
         .then((response) => {
           this.items = response.data.items
+          this.totalItems = response.data.totalItems
         })
         .catch((err) => {
-          this.platform = null
-          console.log('Could not fetch platform by id: ')
-          console.log(err)
+          this.items = []
+          console.error('Could not fetch items: ', err)
         })
         .finally(() => {
-          this.loadingData = true
+          this.loadingData = false
         })
     }
   }

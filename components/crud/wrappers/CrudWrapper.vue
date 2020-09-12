@@ -33,14 +33,14 @@
         ><v-icon>add</v-icon>Add</v-btn
       >
       <v-btn
-        v-if="crudMode === 'update'"
+        v-if="!deleteOnly && crudMode === 'update'"
         @click="save"
         class="mx-2"
         color="primary"
         ><v-icon>save</v-icon>Save</v-btn
       >
       <v-btn
-        v-if="crudMode === 'update'"
+        v-if="crudMode === 'update' || deleteOnly"
         @click="remove"
         class="mx-2"
         color="error"
@@ -77,6 +77,10 @@ export default {
     endpoints: {
       type: Object,
       default: null
+    },
+    deleteOnly: {
+      type: Boolean,
+      default: false
     }
   },
   data() {

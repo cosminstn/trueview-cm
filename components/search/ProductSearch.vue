@@ -1,12 +1,12 @@
 <template>
   <CrudQueryTable
     :headers="headers"
-    :api-controller="`/category/${categoryId}/products/search`"
+    :api-controller="endpoints.search"
     :endpoints="{
       add: `/category/${categoryId}/products`,
       delete: `/product`
     }"
-    title="Product"
+    title="Products"
     crud-component="product"
   />
 </template>
@@ -26,29 +26,38 @@ export default {
   },
 
   computed: {
+    endpoints() {
+      return {
+        search:
+          this.categoryId != null
+            ? `/category/${this.categoryId}/products/search`
+            : '/product/search'
+      }
+    },
     headers() {
       const headers = [
         {
-          align: 'center',
           text: 'Product Id',
-          value: 'id'
+          value: 'id',
+          sortable: false
         },
 
         {
-          align: 'center',
           text: 'Title',
-          value: 'title'
+          value: 'title',
+          sortable: false
         },
         {
-          align: 'center',
           text: 'Universal Product Code',
-          value: 'universalProductCode'
+          value: 'universalProductCode',
+          sortable: false
         }
       ]
-      if (this.id != null) {
+      if (this.categoryId == null) {
         headers.splice(1, 0, {
           text: 'Category ID',
-          value: 'category.id'
+          value: 'category.id',
+          sortable: false
         })
       }
 
