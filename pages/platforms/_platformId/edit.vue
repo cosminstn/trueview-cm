@@ -6,6 +6,19 @@
       @succeeded="$router.push('/platforms')"
       component="platform"
     />
+
+    <CrudQueryTable
+      :headers="headers"
+      :api-controller="`/platform/${platformId}/api-keys/search`"
+      :endpoints="{
+        add: `/platform/${platformId}/api-keys`,
+        search: `/platform/${platformId}/api-keys`,
+        update: `/platform/${platformId}/api-keys`,
+        delete: `/platform/${platformId}/api-keys`
+      }"
+      title="API Keys"
+      crud-component="platformApiKey"
+    />
   </v-card>
 </template>
 
@@ -14,11 +27,34 @@
 
 export default {
   components: {
-    CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper')
+    CrudWrapper: () => import('~/components/crud/wrappers/CrudWrapper'),
+    CrudQueryTable: () => import('~/components/tables/CrudQueryTable')
   },
   data: () => ({
     platform: null
   }),
+  computed: {
+    platformId() {
+      return this.$route.params.platformId
+    },
+    headers() {
+      return [
+        {
+          text: 'Name',
+          value: 'name'
+        },
+        {
+          text: 'Created On',
+          value: 'createdOn'
+        },
+        {
+          text: 'Key',
+          value: 'key'
+        },
+        { text: 'Actions', value: 'actions', sortable: false }
+      ]
+    }
+  },
   created() {
     this.$axios
       .get(`/platform/${this.$route.params.platformId}`)

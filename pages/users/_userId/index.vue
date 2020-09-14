@@ -60,9 +60,8 @@ export default {
     },
     allRoles() {
       const roles = [
-        'CATEGORY_EDITOR',
-        'PRODUCT_EDITOR',
-        'REVIEWS_MODERATOR',
+        'CONTENT_EDITOR',
+        'CONTENT_MODERATOR',
         'PLATFORMS_MANAGER',
         'ACCREDITED_REVIEWER'
       ]
