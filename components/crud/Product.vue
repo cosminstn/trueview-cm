@@ -1,11 +1,11 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <v-text-field v-model="title" label="Product Title" />
       </v-col>
 
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <EntityRef
           v-model="categoryId"
           component="category"
@@ -14,7 +14,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="4">
+      <v-col cols="12" md="6">
         <v-text-field
           v-model="universalProductCode"
           :rules="[rules.required, rules.upc]"

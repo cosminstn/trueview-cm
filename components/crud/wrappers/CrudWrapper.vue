@@ -10,6 +10,7 @@
       v-if="component.toLowerCase() === 'category'"
       :value="value"
     ></Category>
+
     <Product
       ref="product"
       v-else-if="component.toLowerCase() === 'product'"

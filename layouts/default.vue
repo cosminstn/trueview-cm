@@ -127,7 +127,7 @@ export default {
         : []
     },
     items() {
-      const roles = [
+      const pages = [
         {
           icon: 'apps',
           title: 'Welcome',
@@ -150,13 +150,23 @@ export default {
         }
       ]
       if (this.userRoles.includes('ADMIN')) {
-        roles.push({
+        pages.push({
           icon: 'supervisor_account',
           title: 'Users',
           to: '/users'
         })
       }
-      return roles
+      if (
+        this.userRoles.includes('ADMIN') ||
+        this.userRoles.includes('CONTENT_MODERATOR')
+      ) {
+        pages.push({
+          icon: 'flag',
+          title: 'Reviews Reports',
+          to: '/reviews/reports'
+        })
+      }
+      return pages
     }
   },
   created() {

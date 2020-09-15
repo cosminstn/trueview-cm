@@ -96,7 +96,7 @@ export default {
       if (this.loading) {
         return
       }
-
+      console.log('refreshing data at endpoint: ' + endpoint)
       this.loading = true
       this.$axios
         .get(endpoint, {
